@@ -1,5 +1,3 @@
-
-
 import dash
 from dash import Dash, html, Input, Output, State, dcc
 from dash.dash_table import DataTable
@@ -22,7 +20,7 @@ import json
 # for row in cursor:
 #     print(row)
 
-df = px.data.stocks()
+df = pd.read_csv("diabetes.csv", delimiter=",")
 
 app = Dash(__name__, external_stylesheets=[dbc.themes.COSMO])
 
