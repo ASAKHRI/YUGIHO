@@ -22,24 +22,30 @@ import json
 
 df = pd.read_csv("diabetes.csv", delimiter=",")
 
-app = Dash(__name__, external_stylesheets=[dbc.themes.COSMO])
+app = Dash(__name__, external_stylesheets=[dbc.themes.QUARTZ])
 
 theme_switch = ThemeSwitchAIO(
-    aio_id="theme", themes=[dbc.themes.COSMO, dbc.themes.CYBORG]
+    aio_id="theme", themes=[dbc.themes.QUARTZ, dbc.themes.VAPOR]
 )
 
 graph = html.Div(dcc.Graph(id="theme-switch-graph"), className="m-4")
 
-app.layout = dbc.Container([theme_switch, graph], className="m-4 dbc")
+row_1 = dbc.Row(
 
+)
+
+app.layout = html.Div(
+    dbc.Container([theme_switch, graph], className="m-4 dbc"),
+
+)
 
 @app.callback(
     Output("theme-switch-graph", "figure"),
     Input(ThemeSwitchAIO.ids.switch("theme"), "value"),
 )
 def update_graph_theme(toggle):
-    template = "cosmo" if toggle else "cyborg"
-    return px.line(df, x="date", y="GOOG", template=template)
+    template = "quartz" if toggle else "vapor"
+    return px.histogram(df, x="Age", color="Outcome", template=template)
 
 
 if __name__ == "__main__":
